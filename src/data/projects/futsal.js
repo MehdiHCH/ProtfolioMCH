@@ -1,0 +1,150 @@
+export const futsalProject = {
+  id: 1,
+  slug: "1-futsal-analysis-sportscore",
+  title: "Automated Futsal Video Analysis for Performance Reporting",
+  description:
+    "Developed an end-to-end computer vision pipeline that automatically analyzes futsal matches through multi-stage processing: frame classification, player detection, multi-object tracking, and action recognition. The system extracts tactical insights from broadcast video in real-time, reducing manual annotation time by 80%.",
+  image: "/assets/img/projects/SportScore.gif",
+  tags: ["YOLOv11", "DeepSORT", "Computer Vision", "Sports Analytics"],
+  link: "/projects/1-futsal-analysis-sportscore",
+  github: "https://github.com/MehdiHCH",
+  company: "SPORTSCORE - Football Analytics",
+  period: "April 2025 — October 2025",
+  location: "Paris, France - Remote",
+  role: "R&D Engineer Intern",
+  overview:
+    "System Architecture: Video Input → Frame Classification → Player Detection → Multi-Object Tracking → Homography Projection → Action Recognition → Automated Reports. Key Contributions: Implemented multi-stream CUDA pipeline with 5 parallel inference streams. Designed YOLOv11 variants for frame filtering (99.95% accuracy) and ball detection (90.1% precision). Integrated DeepSORT tracker with jersey OCR for persistent player identity. Built homography-based spatial projection for tactical analysis. Optimized pipeline with TensorRT FP16 achieving 117% speedup (13 FPS processing).",
+  problemStatement: {
+    title: "Challenges in Futsal Analysis",
+    description:
+      "Modern sports analytics requires automated and real-time processing of video data to extract meaningful tactical insights from matches.",
+    challenges: [
+      "Real-time processing of HD video streams (30 FPS)",
+      "Accurate multi-player tracking with jersey number recognition",
+      "Complex action detection (7+ pass types with contextual understanding)",
+      "Goal validation with spatial projection",
+      "Performance optimization for practical deployment",
+    ],
+  },
+  solution:
+    "Developed an end-to-end pipeline combining YOLOv11 for detection, DeepSORT for tracking, and custom rules for action classification, achieving 88% system accuracy.",
+  keyAchievements: [
+    "Enhanced and optimized automated video analysis pipeline for futsal matches",
+    "Achieved 88% system accuracy with real-time processing at 13 FPS",
+    "Frame Classification: 99.95% accuracy with YOLOv11m-cls on 67,801 frames",
+    "Ball Detection: 90.1% precision with YOLOv11x (83.4% recall)",
+    "7+ action types detected: Pass variants, shots, dribbles, interceptions, goals",
+    "50% inference time reduction through CUDA Stream parallelization (13 FPS, +117%)",
+    "Optimized pipeline with TensorRT FP16, asynchronous I/O operations",
+    "Supervised and trained 4 interns on computer vision best practices",
+    "Delivered comprehensive automated performance reports with heatmaps, pass maps, JSON exports",
+    "Collected and annotated 5000+ frames using CVAT for training data",
+  ],
+  techStack: [
+    "Python",
+    "PyTorch",
+    "YOLOv11",
+    "DeepSORT",
+    "OpenCV",
+    "CUDA",
+    "TensorRT",
+    "Pandas",
+    "NumPy",
+    "FFmpeg",
+  ],
+  modules: [
+    {
+      id: 1,
+      name: "Frame Classification (Module 1)",
+      description:
+        "Complete automated analysis using YOLOv11m-cls to filter relevant gameplay frames and discard replays, transitions, and non-gameplay sequences.",
+      details:
+        "Intelligent filtering reduces processing time by 20% while maintaining 99.95% accuracy. Trained on 67,801 frames with only 6 false positives.",
+      metrics: {
+        accuracy: "99.95%",
+        improvement: "20% Faster",
+        model: "YOLOv11m-cls",
+        trainingData: "67,801 frames",
+        inferenceSpeed: "Real-time (30 FPS)",
+        falsePositives: "Only 6 errors",
+      },
+    },
+    {
+      id: 2,
+      name: "Action Detection & Classification (Modules 2-6)",
+      description:
+        "Real-time detection and classification of 11 types of player actions including passes, shots, dribbles, and interceptions using DeepSORT tracking.",
+      details:
+        "System uses DeepSORT to maintain player identity and spatio-temporal rules for accurate action attribution. Pose estimation with 17 keypoints for movement analysis.",
+      metrics: {
+        actionsDetected: "11 Types",
+        tracking: "DeepSORT with Re-ID",
+        processing: "Real-time",
+        playerReID: "HSV + OCR + Trajectory",
+        poseEstimation: "17 Keypoints",
+        spatialProjection: "Homography-based",
+      },
+    },
+    {
+      id: 3,
+      name: "Object Detection & Goal Recognition (Module 3)",
+      description:
+        "Advanced ball detection and goal confirmation using fine-tuned YOLOv11x with homography-based spatial projection.",
+      details:
+        "System validates goals through zone-based spatial projection, ensuring accuracy. Assists are automatically attributed based on preceding key passes.",
+      metrics: {
+        precision: "90.1%",
+        validation: "Zone-based",
+        model: "YOLOv11x",
+        inferenceSpeed: "9.6 ms/frame",
+        recall: "83.4%",
+        trainingDataset: "FIFA Futsal",
+      },
+    },
+  ],
+  results: {
+    systemAccuracy: "88%",
+    frameAccuracy: "99.95%",
+    ballDetectionPrecision: "90.1%",
+    inferenceFPS: "13 FPS",
+    timeSaved: "80%",
+    actionTypes: "7+",
+  },
+  visualizations: [
+    {
+      title: "Real-time Analysis Dashboard",
+      description: "Complete system running on FIFA Futsal World Cup match with synchronized multi-window visualization",
+      image: "/assets/img/projects/MVP.png",
+    },
+    {
+      title: "Player Tracking & Detection",
+      description: "Real-time multi-player tracking with jersey number recognition and ball trajectory prediction",
+      image: "/assets/img/projects/SportScore.gif",
+    },
+  ],
+  team: ["Hicham El Mehdi"],
+  supervisor: "SPORTSCORE Technical Lead",
+  demos: [
+    {
+      id: 1,
+      title: "Action Detection",
+      video: "/assets/videos/sportscore/Action_detection.mp4",
+      description: "Real-time detection of player actions (passes, shots, dribbles) with multi-player tracking",
+      category: "Sports Analytics",
+    },
+    {
+      id: 2,
+      title: "Frame Classification",
+      video: "/assets/videos/sportscore/Class.mp4",
+      description: "Automatic frame classification and ball tracking with 99.95% accuracy",
+      category: "Detection",
+    },
+    {
+      id: 3,
+      title: "Object Detection & Goal Recognition",
+      video: "/assets/videos/sportscore/IS_But.mp4",
+      description: "Advanced ball detection and goal confirmation using fine-tuned YOLOv11x. The system validates goals through homography-based spatial projection, ensuring the ball crosses the goal line with proper possession tracking. Assists are automatically attributed based on preceding key passes.",
+      category: "Detection",
+    },
+  ],
+};

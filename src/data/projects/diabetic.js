@@ -1,0 +1,158 @@
+export const diabeticProject = {
+  id: 5,
+  slug: "5-diabetic",
+  title: "Diabetic Retinopathy Detection with EfficientNet",
+  description:
+    "Automated deep learning system for early detection and classification of diabetic retinopathy from retinal images. Leverages transfer learning with EfficientNetB0 to classify images into 5 severity stages, enabling objective, scalable screening accessible in areas with limited ophthalmology expertise.",
+  image: "/assets/img/projects/retinopathy_detection.jpg",
+  tags: ["EfficientNet", "Medical AI", "Deep Learning", "Healthcare"],
+  link: "/projects/5-diabetic",
+  github: "https://github.com/MehdiHCH/Diabetic-Retinopathy-Detection",
+  company: "Ibn Tofail University",
+  period: "October 2024 — January 2025",
+  location: "Kenitra, Morocco",
+  role: "Academic Project",
+  overview:
+    "System Architecture: Retinal Image → Preprocessing (Gaussian Filtering, Resizing 224×224) → EfficientNetB0 Feature Extraction → Classification Head → Disease Stage Prediction. Key Contributions: Implemented transfer learning from ImageNet pre-trained EfficientNetB0. Designed data augmentation strategy (zoom ±20%, shifts ±20%, rotation ±15°) addressing class imbalance. Applied Weighted Cross-Entropy Loss for underrepresented severity classes. Optimized training with early stopping and regularization (Dropout, L2) preventing overfitting. Achieved 98.5% training accuracy with controlled 97% validation accuracy. Lightweight 5.3M parameter model enabling edge deployment with <100ms inference per image.",
+  problemStatement: {
+    title: "Diabetic Retinopathy Detection Challenge",
+    description:
+      "Diabetic retinopathy is a major cause of blindness worldwide. Early detection is essential but manual diagnosis is slow, subjective, and requires expert ophthalmologists.",
+    challenges: [
+      "Manual diagnosis: Slow and subjective, requires expert ophthalmologists",
+      "Many subtle early indicators difficult for human detection",
+      "High cost and time for regular examinations",
+      "Limited access in areas without specialists",
+      "Growing volume of diabetes cases globally",
+    ],
+  },
+  solution:
+    "Transfer learning with EfficientNetB0 for automated 5-class classification with preprocessing, augmentation, and fine-tuning strategies.",
+  keyAchievements: [
+    "97% validation accuracy on 5-class classification",
+    "98.5% training accuracy with controlled overfitting",
+    "Lightweight model: Only 5.3M parameters vs ResNet-50 (25M)",
+    "Fast inference: <100ms per image",
+    "High precision per-class metrics (93-99%)",
+    "Strong recall across all severity stages",
+    "Robust to image quality variations",
+    "Transfer learning from ImageNet pre-training",
+    "Deployable on modest infrastructure",
+    "Analyzed on APTOS 2019 dataset (3,662 images)",
+  ],
+  techStack: [
+    "TensorFlow 2.0",
+    "Keras",
+    "EfficientNetB0",
+    "OpenCV",
+    "NumPy",
+    "Pandas",
+    "Matplotlib",
+    "Seaborn",
+    "NVIDIA RTX 4060",
+  ],
+  modules: [
+    {
+      id: 1,
+      name: "Data Preprocessing",
+      description: "Advanced image processing for retinal images",
+      metrics: {
+        filtering: "Gaussian Filtering",
+        resizing: "224×224 pixels",
+        normalization: "[0, 1] range",
+        split: "80% train / 20%",
+      },
+    },
+    {
+      id: 2,
+      name: "Data Augmentation",
+      description: "Augmentation to handle variations and prevent overfitting",
+      metrics: {
+        zoom: "±20%",
+        shift: "±20%",
+        rotation: "±15°",
+        appliedTo: "Minority classes",
+      },
+    },
+    {
+      id: 3,
+      name: "Model Architecture (EfficientNetB0)",
+      description: "Efficient CNN with compound scaling for classification",
+      metrics: {
+        baseModel: "EfficientNetB0",
+        parameters: "5.3M",
+        layers: "237",
+        mbConvBlocks: "16",
+        outputClasses: "5",
+      },
+    },
+    {
+      id: 4,
+      name: "Training & Optimization",
+      description: "Training strategy with dropout and regularization",
+      metrics: {
+        optimizer: "Adam",
+        learningRate: "0.001",
+        batchSize: "32",
+        epochs: "40",
+        earlyStopping: "Patience: 10",
+        hardware: "RTX 4060",
+        duration: "~2 hours",
+      },
+    },
+  ],
+  dataset: {
+    name: "APTOS 2019 Blindness Detection",
+    source: "Kaggle Competition",
+    volume: "3,662 images",
+    annotation: "Expert ophthalmologists",
+    classes: [
+      { name: "No Retinopathy", label: "0", distribution: "45%" },
+      { name: "Mild", label: "1", distribution: "15%" },
+      { name: "Moderate", label: "2", distribution: "20%" },
+      { name: "Severe", label: "3", distribution: "12%" },
+      { name: "Proliferative DR", label: "4", distribution: "8%" },
+    ],
+  },
+  results: {
+    trainingAccuracy: "98.5%",
+    validationAccuracy: "97.0%",
+    trainingLoss: "0.045",
+    validationLoss: "0.089",
+    precision: "96.5%",
+    recall: "96.8%",
+    f1Score: "0.96",
+  },
+  visualizations: [
+    {
+      title: "Diabetic Retinopathy Detection System",
+      description: "Automated EfficientNetB0 classification for 5-stage disease detection",
+      image: "/assets/img/projects/retinopathy_detection.jpg",
+    },
+  ],
+  challenges: {
+    classImbalance: {
+      problem: "Underrepresented classes (Proliferate_DR: 8%)",
+      solution:
+        "Weighted loss, aggressive augmentation for minorities, SMOTE",
+    },
+    overfitting: {
+      problem: "Gap between training and validation",
+      solution:
+        "Dropout layers, intensive augmentation, early stopping, L2 regularization",
+    },
+    imageQuality: {
+      problem: "Lighting variations, resolution, noise",
+      solution:
+        "Gaussian filtering, systematic normalization, quality-simulating augmentation",
+    },
+  },
+  team: [
+    "Abdelrhafour EL MOUSSAOUI",
+    "Mouad AOUTIR",
+    "El Mehdi HICHAM",
+    "Mohammed Imrane GRICH",
+  ],
+  supervisor: "Pr. Souad EDDAROUICH",
+  demos: [],
+};
