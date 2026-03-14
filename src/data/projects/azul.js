@@ -14,15 +14,15 @@ export const azulProject = {
   location: "Kenitra, Morocco",
   role: "Academic Project",
   overview: {
-    architecture: `flowchart LR
-    A([Handwritten Image]) --> B[Preprocessing\\nOtsu Thresholding]
-    B --> C1[CNN\\nCharacter-level]
-    B --> C2[Tesseract OCR\\nWord-level]
-    B --> C3[PaddleOCR\\nSentence-level]
+  architecture: `flowchart LR
+    A([Handwritten Image]) --> B[Preprocessing<br/>Otsu Thresholding]
+    B --> C1[CNN<br/>Character-level]
+    B --> C2[Tesseract OCR<br/>Word-level]
+    B --> C3[PaddleOCR<br/>Sentence-level]
     C1 --> D[Prediction Fusion]
     C2 --> D
     C3 --> D
-    D --> E([Multi-format Export\\nTXT · JSON · CSV])`,
+    D --> E([Multi-format Export<br/>TXT · JSON · CSV])`,
     keyContributions: [
       "Built a custom 6-layer CNN from scratch, trained on all 33 Tifinagh characters, achieving 94.2% character-level recognition accuracy.",
       "Fine-tuned Tesseract OCR on the AMHCD (Amazigh Handwritten Character Dataset) in collaboration with IRCAM, optimizing it specifically for Amazigh word-level recognition.",
