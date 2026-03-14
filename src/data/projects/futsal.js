@@ -12,8 +12,23 @@ export const futsalProject = {
   period: "April 2025 — October 2025",
   location: "Paris, France - Remote",
   role: "R&D Engineer Intern",
-  overview:
-    "System Architecture: Video Input → Frame Classification → Player Detection → Multi-Object Tracking → Homography Projection → Action Recognition → Automated Reports. Key Contributions: Implemented multi-stream CUDA pipeline with 5 parallel inference streams. Designed YOLOv11 variants for frame filtering (99.95% accuracy) and ball detection (90.1% precision). Integrated DeepSORT tracker with jersey OCR for persistent player identity. Built homography-based spatial projection for tactical analysis. Optimized pipeline with TensorRT FP16 achieving 117% speedup (13 FPS processing).",
+  overview: {
+    architecture: `flowchart LR
+    A([Video Input]) --> B[Frame Classification\\nYOLOv11m-cls]
+    B --> C[Player Detection\\nYOLOv11x]
+    C --> D[Multi-Object Tracking\\nDeepSORT + OCR]
+    D --> E[Homography\\nProjection]
+    E --> F[Action Recognition\\n7+ Types]
+    F --> G([Automated Reports\\nHeatmaps · JSON · CSV])`,
+    keyContributions: [
+      "Engineered a multi-stream CUDA pipeline with 5 parallel inference streams, achieving 13 FPS throughput — a 117% speedup over the sequential baseline.",
+      "Designed two YOLOv11 variants: a classification model (YOLOv11m-cls) for frame filtering at 99.95% accuracy across 67,801 frames, and a detection model (YOLOv11x) for ball localization at 90.1% precision.",
+      "Built a robust player re-identification system combining DeepSORT tracking, jersey number OCR, HSV color matching, and trajectory analysis to maintain persistent identities across the full match.",
+      "Developed a homography-based spatial projection module mapping pixel coordinates onto a standardized pitch plane — enabling goal validation, pass mapping, and tactical heatmap generation.",
+      "Classified 7+ action types (passes, shots, dribbles, interceptions, goals) using spatio-temporal rules applied over tracked player trajectories.",
+      "Mentored 4 junior interns on computer vision workflows, CVAT annotation practices, and production-grade Python development.",
+    ],
+  },
   problemStatement: {
     title: "Challenges in Futsal Analysis",
     description:

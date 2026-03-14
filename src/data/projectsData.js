@@ -6,4 +6,3 @@ export const projectsData = allProjects;
 export const getProjectBySlug = getSlug;
 
 export const getProjectById = getById;
-

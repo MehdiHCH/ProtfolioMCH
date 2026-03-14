@@ -24,10 +24,15 @@ const skills = [
   "CUDA",
   "TensorRT",
   "PaddleOCR",
-  "Kubernetes",
+  "LangChain",
+  "Hugging Face",
+  "RAG Pipelines",
   "AWS",
   "Git",
   "CVAT",
+  "Faster R-CNN",
+  "Pose Estimation",
+  "MLOps",
 ];
 
 export const Hero = () => {
@@ -47,6 +52,7 @@ export const Hero = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(30)].map((_, i) => (
           <div
+            key={i}
             className="absolute w-1.5 h-1.5 rounded-full opacity-60"
             style={{
               backgroundColor: "#20B2A6",
@@ -69,7 +75,7 @@ export const Hero = () => {
             <div className="animate-fade-in">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
                 <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                AI Engineer • Computer Vision Specialist
+                AI Engineer & Data Scientist • Computer Vision Specialist
               </span>
             </div>
 
@@ -85,18 +91,22 @@ export const Hero = () => {
                 </span>
               </h1>
               <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">
-                Hi, I'm EL MEHDI HICHAM — an AI Engineer passionate about Computer Vision, Deep Learning, and sports analytics. I build intelligent systems that combine object detection, tracking, and real-time analysis to solve complex real-world problems.
+                Hi, I'm EL MEHDI HICHAM — a junior AI Engineer & Data Scientist
+                with a Master's in Artificial Intelligence from Ibn Tofail
+                University. I specialize in Computer Vision, Deep Learning, and
+                real-time video analytics, building end-to-end systems from
+                detection and tracking to automated reporting.
               </p>
             </div>
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-              <Button 
+              <Button
                 size="lg"
                 onClick={() => {
-                  const contactSection = document.getElementById('contact');
+                  const contactSection = document.getElementById("contact");
                   if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                    contactSection.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
               >
@@ -104,9 +114,9 @@ export const Hero = () => {
               </Button>
               <AnimatedBorderButton
                 onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = '/CV.pdf';
-                  link.download = 'EL_MEHDI_HICHAM_CV.pdf';
+                  const link = document.createElement("a");
+                  link.href = "/CV.pdf";
+                  link.download = "EL_MEHDI_HICHAM_CV.pdf";
                   document.body.appendChild(link);
                   link.click();
                   document.body.removeChild(link);
@@ -122,7 +132,10 @@ export const Hero = () => {
               <span className="text-sm text-muted-foreground">Follow me: </span>
               {[
                 { icon: Github, href: "https://github.com/MehdiHCH" },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/elmehdihicham" },
+                {
+                  icon: Linkedin,
+                  href: "https://www.linkedin.com/in/elmehdihicham",
+                },
                 { icon: Twitter, href: "https://github.com/MehdiHCH" },
               ].map((social, idx) => (
                 <a
@@ -135,15 +148,15 @@ export const Hero = () => {
               ))}
             </div>
           </div>
+
           {/* Right Column - Profile Image */}
-          <div className="relatice animate-fade-in animation-delay-300">
-            {/* Profile Image */}
+          <div className="relative animate-fade-in animation-delay-300">
             <div className="relative max-w-md mx-auto">
               <div
                 className="absolute inset-0 
-              rounded-3xl bg-gradient-to-br 
-              from-primary/30 via-transparent 
-              to-primary/10 blur-2xl animate-pulse"
+                rounded-3xl bg-gradient-to-br 
+                from-primary/30 via-transparent 
+                to-primary/10 blur-2xl animate-pulse"
               />
               <div className="relative glass rounded-3xl p-2 glow-border">
                 <img
@@ -152,7 +165,7 @@ export const Hero = () => {
                   className="w-full aspect-[4/5] object-cover rounded-2xl"
                 />
 
-                {/* Floating Badge */}
+                {/* Floating Badge - Availability */}
                 <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float">
                   <div className="flex items-center gap-3">
                     <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
@@ -161,11 +174,12 @@ export const Hero = () => {
                     </span>
                   </div>
                 </div>
-                {/* Stats Badge */}
+
+                {/* Stats Badge - Experience */}
                 <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
-                  <div className="text-2xl font-bold text-primary">5+</div>
+                  <div className="text-2xl font-bold text-primary"> </div>
                   <div className="text-xs text-muted-foreground">
-                    Years Exp.
+                  
                   </div>
                 </div>
               </div>
@@ -181,11 +195,11 @@ export const Hero = () => {
           <div className="relative overflow-hidden">
             <div
               className="absolute left-0 top-0 bottom-0 w-32
-             bg-gradient-to-r from-background to-transparent z-10"
+               bg-gradient-to-r from-background to-transparent z-10"
             />
             <div
               className="absolute right-0 top-0 bottom-0 w-32
-             bg-gradient-to-l from-background to-transparent z-10"
+               bg-gradient-to-l from-background to-transparent z-10"
             />
             <div className="flex animate-marquee">
               {[...skills, ...skills].map((skill, idx) => (
@@ -202,7 +216,7 @@ export const Hero = () => {
 
       <div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 
-      animate-fade-in animation-delay-800"
+        animate-fade-in animation-delay-800"
       >
         <a
           href="#about"

@@ -12,8 +12,23 @@ export const rosProject = {
   period: "February 2024 — July 2024",
   location: "Kenitra, Morocco",
   role: "Academic Project",
-  overview:
-    "System Architecture: Sensors (LIDAR + Cameras) → Point Cloud Processing → Perception Layer → TD3 Decision Agent → Control Commands → Motor Actuators. Key Contributions: Architected ROS2 distributed system with decoupled perception-decision-control modules. Implemented TD3 (Twin Delayed DDPG) reinforcement learning agent with actor-critic networks. Engineered sensor fusion pipeline combining Velodyne LIDAR (720 rays) and RGB camera data. Designed custom reward function balancing safety, progress, and efficiency. Built URDF/Gazebo simulation with realistic physics. Achieved functional autonomous navigation in simulation with real-time obstacle detection and collision avoidance.",
+  overview: {
+    architecture: `flowchart LR
+    A1([LIDAR\\n720 rays]) --> B[Perception Layer\\nPoint Cloud Processing]
+    A2([RGB Camera]) --> B
+    B --> C[TD3 Agent\\nActor-Critic Networks]
+    C --> D[Control Layer\\nROS2 cmd_vel · 50Hz]
+    D --> E([Motor Actuators])
+    C <-.->|Reward Signal| F[Gazebo Simulation\\nPhysics Environment]`,
+    keyContributions: [
+      "Architected a modular ROS2 distributed system with cleanly decoupled perception, decision, and control layers communicating over asynchronous pub/sub topics.",
+      "Implemented a TD3 (Twin Delayed DDPG) reinforcement learning agent with actor and critic networks, trained over 1,000+ episodes of 500 steps each in Gazebo simulation.",
+      "Designed a custom reward function balancing three competing objectives: goal-directed progress, obstacle safety margins, and energy efficiency.",
+      "Engineered a multi-modal sensor fusion pipeline combining Velodyne LIDAR (720 rays at 10 Hz) and RGB camera streams, with intelligent downsampling (720→180 rays) for real-time GPU processing.",
+      "Built the full vehicle model in URDF/Xacro with realistic physics, integrated into Gazebo 11 with domain randomization and injected sensor noise to reduce the sim-to-real gap.",
+      "Implemented a CNN-based traffic sign recognition module and integrated trajectory planning to complement the RL-based navigation policy.",
+    ],
+  },
   problemStatement: {
     title: "Autonomous Driving Challenges",
     description:

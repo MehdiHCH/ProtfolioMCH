@@ -13,7 +13,25 @@ export const azulProject = {
   period: "October 2024 — February 2025",
   location: "Kenitra, Morocco",
   role: "Academic Project",
-  overview: `System Architecture: Handwritten Image → Preprocessing (Otsu Thresholding) → Parallel Recognition Engines (CNN / Tesseract / PaddleOCR) → Prediction Fusion → Multi-format Export. Key Contributions: Built custom 6-layer CNN achieving 94.2% character accuracy. Fine-tuned Tesseract OCR on AMHCD dataset for Amazigh optimization. Adapted PaddleOCR for word/line recognition. Implemented hybrid fusion combining 3 independent approaches achieving 91.2% sentence accuracy. Developed augmentation pipeline (×5 expansion) and validated with 50+ users. First open-source Tifinagh OCR solution in Morocco, preserving Amazigh cultural heritage through AI.`,
+  overview: {
+    architecture: `flowchart LR
+    A([Handwritten Image]) --> B[Preprocessing\\nOtsu Thresholding]
+    B --> C1[CNN\\nCharacter-level]
+    B --> C2[Tesseract OCR\\nWord-level]
+    B --> C3[PaddleOCR\\nSentence-level]
+    C1 --> D[Prediction Fusion]
+    C2 --> D
+    C3 --> D
+    D --> E([Multi-format Export\\nTXT · JSON · CSV])`,
+    keyContributions: [
+      "Built a custom 6-layer CNN from scratch, trained on all 33 Tifinagh characters, achieving 94.2% character-level recognition accuracy.",
+      "Fine-tuned Tesseract OCR on the AMHCD (Amazigh Handwritten Character Dataset) in collaboration with IRCAM, optimizing it specifically for Amazigh word-level recognition.",
+      "Adapted PaddleOCR with multi-scale detection for robust full-line and sentence-level Tifinagh recognition, reaching 91.2% sentence accuracy.",
+      "Engineered a data augmentation pipeline (rotation, translation, zoom) that expanded the training dataset fivefold, compensating for the scarcity of annotated Amazigh data.",
+      "Designed and implemented a hybrid prediction fusion mechanism combining outputs from all three engines, consistently outperforming any single-model approach.",
+      "Delivered the first open-source Tifinagh OCR solution in Morocco, validated with 50+ real users and supporting PNG, JPG, and JPEG input formats.",
+    ],
+  },
   problemStatement: {
     title: "Tifinagh Digitization Challenge",
     description:

@@ -12,8 +12,21 @@ export const diabeticProject = {
   period: "October 2024 — January 2025",
   location: "Kenitra, Morocco",
   role: "Academic Project",
-  overview:
-    "System Architecture: Retinal Image → Preprocessing (Gaussian Filtering, Resizing 224×224) → EfficientNetB0 Feature Extraction → Classification Head → Disease Stage Prediction. Key Contributions: Implemented transfer learning from ImageNet pre-trained EfficientNetB0. Designed data augmentation strategy (zoom ±20%, shifts ±20%, rotation ±15°) addressing class imbalance. Applied Weighted Cross-Entropy Loss for underrepresented severity classes. Optimized training with early stopping and regularization (Dropout, L2) preventing overfitting. Achieved 98.5% training accuracy with controlled 97% validation accuracy. Lightweight 5.3M parameter model enabling edge deployment with <100ms inference per image.",
+  overview: {
+    architecture: `flowchart LR
+    A([Retinal Image]) --> B[Preprocessing\\nGaussian Filter · 224×224]
+    B --> C[EfficientNetB0\\nFeature Extraction]
+    C --> D[Classification Head\\nDropout + Dense]
+    D --> E([Disease Stage Prediction\\n5 Severity Classes])`,
+    keyContributions: [
+      "Implemented transfer learning from a pre-trained ImageNet EfficientNetB0 backbone, freezing base layers and attaching a lightweight classification head tailored for 5-class retinopathy staging.",
+      "Designed a targeted data augmentation strategy (zoom ±20%, shifts ±20%, rotation ±15°) applied preferentially to minority classes, directly mitigating the severe class imbalance of the APTOS 2019 dataset.",
+      "Applied Weighted Cross-Entropy Loss to further address underrepresented severity stages (Proliferative DR at only 8% of samples), improving per-class recall across all five categories.",
+      "Optimized training with the Adam optimizer, early stopping (patience: 10), Dropout regularization, and L2 weight decay — achieving 97% validation accuracy with minimal gap from 98.5% training accuracy.",
+      "Delivered a production-ready model with only 5.3M parameters and sub-100ms inference per image, making it deployable on modest hardware without requiring specialized infrastructure.",
+      "Evaluated the model rigorously on the APTOS 2019 Blindness Detection dataset (3,662 expert-annotated retinal images), reporting per-class precision (93–99%), recall, and F1-score across all severity stages.",
+    ],
+  },
   problemStatement: {
     title: "Diabetic Retinopathy Detection Challenge",
     description:

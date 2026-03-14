@@ -13,8 +13,22 @@ export const e2eProject = {
   period: "October 2024 — January 2025",
   location: "Kenitra, Morocco",
   role: "Engineering Intern",
-  overview:
-    "System Architecture: Video Frames → RegNet-Y CNN → Gate Shift Modules → Feature Extraction → Bidirectional GRU → Frame-wise Predictions. Key Contributions: Designed RegNet-Y with Gate Shift Modules for efficient local temporal modeling. Implemented Bidirectional GRU capturing past and future context in action sequences. Engineered data pipeline supporting 40GB FIFA Futsal World Cup video. Optimized training on RTX 4060 with mixed precision. Conducted systematic ablations comparing clip lengths (16 vs 50 frames). Achieved 93% recall on dribble detection with 10M parameters (2.5× lighter than ResNet-50).",
+  overview: {
+    architecture: `flowchart LR
+    A([Video Frames]) --> B[RegNet-Y CNN\\nFeature Extraction]
+    B --> C[Gate Shift Modules\\nLocal Temporal Modeling]
+    C --> D[Bidirectional GRU\\nGlobal Temporal Reasoning]
+    D --> E[Frame-wise\\nPredictions]
+    E --> F([Action Spotting\\n±1s Precision])`,
+    keyContributions: [
+      "Designed a RegNet-Y backbone augmented with Gate Shift Modules (GSM) for efficient local temporal modeling — capturing motion patterns without the computational cost of 3D convolutions.",
+      "Implemented a Bidirectional GRU on top of extracted features to model both past and future context simultaneously, enabling precise frame-level action localization at ±1-second accuracy.",
+      "Built and managed the full data engineering pipeline: frame extraction, JSON annotation parsing, temporal normalization, and augmentation over 40 GB of 2024 FIFA Futsal World Cup footage (7 matches, 14 halves).",
+      "Conducted systematic ablation studies comparing clip lengths of 16 and 50 frames to determine optimal temporal context windows for each action class.",
+      "Applied Weighted Cross-Entropy Loss to address class imbalance, achieving 0.93 recall on the dribble detection class (DRIVE).",
+      "Optimized training on RTX 4060 using mixed precision (FP16) and checkpointing, keeping a 450-hour training workload manageable across iterations.",
+    ],
+  },
   problemStatement: {
     title: "Temporal Event Detection Challenges",
     description:

@@ -3,6 +3,127 @@ import { ArrowLeft, ExternalLink, Github, Users } from "lucide-react";
 import { getProjectBySlug } from "@/data/projectsData";
 import { Button } from "@/components/Button";
 import { DemosSection } from "@/components/DemosSection";
+import { useEffect, useRef } from "react";
+
+// Mermaid diagram renderer
+const MermaidDiagram = ({ chart }) => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!chart || !ref.current) return;
+
+    const renderDiagram = async () => {
+      try {
+        // Dynamically import mermaid
+        const mermaid = (await import("mermaid")).default;
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: "dark",
+          themeVariables: {
+            primaryColor: "#6366f1",
+            primaryTextColor: "#e2e8f0",
+            primaryBorderColor: "#6366f1",
+            lineColor: "#6366f1",
+            secondaryColor: "#1e293b",
+            tertiaryColor: "#0f172a",
+            background: "#0f172a",
+            mainBkg: "#1e293b",
+            nodeBorder: "#6366f1",
+            clusterBkg: "#1e293b",
+            titleColor: "#e2e8f0",
+            edgeLabelBackground: "#1e293b",
+            attributeBackgroundColorEven: "#1e293b",
+            attributeBackgroundColorOdd: "#0f172a",
+          },
+          flowchart: {
+            curve: "basis",
+            padding: 20,
+          },
+        });
+
+        const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
+        const { svg } = await mermaid.render(id, chart);
+        if (ref.current) {
+          ref.current.innerHTML = svg;
+        }
+      } catch (err) {
+        console.error("Mermaid render error:", err);
+        if (ref.current) {
+          ref.current.innerHTML = `<pre class="text-xs text-muted-foreground p-4 overflow-auto">${chart}</pre>`;
+        }
+      }
+    };
+
+    renderDiagram();
+  }, [chart]);
+
+  return (
+    <div
+      ref={ref}
+      className="w-full overflow-x-auto flex justify-center items-center min-h-[120px]"
+    />
+  );
+};
+
+// Overview section: handles both old string format and new object format
+const OverviewSection = ({ overview }) => {
+  // Legacy: overview is a plain string
+  if (typeof overview === "string") {
+    return (
+      <section className="space-y-4">
+        <h2 className="text-3xl font-bold mb-4">Overview</h2>
+        <p className="text-lg text-muted-foreground leading-relaxed">
+          {overview}
+        </p>
+      </section>
+    );
+  }
+
+  // New format: overview is { architecture, keyContributions }
+  return (
+    <section className="space-y-8">
+      <h2 className="text-3xl font-bold">Overview</h2>
+
+      {/* System Architecture Diagram */}
+      {overview.architecture && (
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold text-primary uppercase tracking-wider">
+            System Architecture
+          </h3>
+          <div className="glass p-6 rounded-2xl border border-border/50 overflow-hidden">
+            <MermaidDiagram chart={overview.architecture} />
+          </div>
+        </div>
+      )}
+
+      {/* Key Contributions */}
+      {overview.keyContributions && overview.keyContributions.length > 0 && (
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold text-primary uppercase tracking-wider">
+            Key Contributions
+          </h3>
+          <div className="space-y-3">
+            {overview.keyContributions.map((contribution, idx) => (
+              <div
+                key={idx}
+                className="flex gap-4 glass p-4 rounded-xl border border-border/50"
+              >
+                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center mt-0.5">
+                  <span className="text-xs font-bold text-primary">
+                    {idx + 1}
+                  </span>
+                </div>
+                <p className="text-muted-foreground leading-relaxed">
+                  {contribution}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
 
 export const ProjectDetail = () => {
   const { slug } = useParams();
@@ -110,13 +231,11 @@ export const ProjectDetail = () => {
         <div className="grid lg:grid-cols-3 gap-8 mb-16">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-12">
-            {/* Overview */}
-            <section className="space-y-4">
-              <h2 className="text-3xl font-bold mb-4">Overview</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {project.overview}
-              </p>
-            </section>
+
+            {/* Overview — handles string or object */}
+            {project.overview && (
+              <OverviewSection overview={project.overview} />
+            )}
 
             {/* Problem Statement */}
             {project.problemStatement && (
