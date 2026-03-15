@@ -1,1 +1,0 @@
-import{Xn as e}from"./index-ws0Lvbc6.js";var t=class{constructor(e){this.init=e,this.records=this.init()}static#e=e(this,`ImperativeState`);reset(){this.records=this.init()}};export{t};
