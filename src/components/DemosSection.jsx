@@ -18,7 +18,7 @@ export const VideoDemo = ({ demo }) => {
             className="w-full h-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <source src={demo.video} type="video/mp4" />
+            <source src={`${import.meta.env.BASE_URL}${demo.video}`} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         ) : (

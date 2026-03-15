@@ -171,7 +171,7 @@ export const ProjectDetail = () => {
           {/* Project Image (full image, no empty frame) */}
           <div className="glass rounded-2xl overflow-hidden glow-border">
             <img
-              src={project.image}
+              src={`${import.meta.env.BASE_URL}${project.image}`}
               alt={project.title}
               className="w-full h-auto"
             />
@@ -338,7 +338,7 @@ export const ProjectDetail = () => {
                       className="glass rounded-2xl overflow-hidden border border-border/50"
                     >
                       <img
-                        src={viz.image}
+                        src={`${import.meta.env.BASE_URL}${viz.image}`}
                         alt={viz.title}
                         className="w-full h-auto"
                       />
